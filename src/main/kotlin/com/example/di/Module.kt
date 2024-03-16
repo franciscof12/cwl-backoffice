@@ -8,4 +8,5 @@ val appModule = module {
     single<VerticalService> { VerticalServiceImpl() }
     single<SourceService> { SourceServiceImpl() }
     single<ParserTypeService> { ParserTypeServiceImpl() }
+    single<SourceContentService> { SourceContentServiceImpl() }
 }
