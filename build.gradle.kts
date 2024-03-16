@@ -31,6 +31,7 @@ dependencies {
     implementation("io.ktor:ktor-server-call-logging-jvm")
     implementation("io.ktor:ktor-server-content-negotiation-jvm")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm")
+    implementation("com.typesafe:config:1.4.1")
     implementation("mysql:mysql-connector-java:8.0.23")
     implementation("io.insert-koin:koin-ktor:$koinKtor")
     implementation("com.zaxxer:HikariCP:$hikaricpVersion")
