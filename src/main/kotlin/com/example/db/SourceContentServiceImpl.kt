@@ -28,7 +28,11 @@ class SourceContentServiceImpl : SourceContentService {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getSourceContent(id: String): SourceContent = dbQuery {
-        TODO("Not yet implemented")
+    override suspend fun getSourcesContent(country: String, vertical: Int, source: Int): List<SourceContent> = dbQuery {
+        SourcesContent.select {
+            (SourcesContent.fkCountry eq country) and
+                    (SourcesContent.fkVertical eq vertical) and
+                    (SourcesContent.fkSource eq source)
+        }.map { resultRowToSourceContent(it) }
     }
 }
