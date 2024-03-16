@@ -7,7 +7,7 @@ import com.example.models.Sources
 
 
 class SourceServiceImpl : SourceService {
-    private fun resultRowToVertical(row: ResultRow): Source {
+    private fun resultRowToSource(row: ResultRow): Source {
         return Source(
             iIdL = row[Sources.id],
             fkCIdTblCountries = row[Sources.country],
@@ -21,9 +21,8 @@ class SourceServiceImpl : SourceService {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getAllSources(): List<Source> = dbQuery{
-        Sources.selectAll().map { resultRowToVertical(it) }
-        TODO("Reparar el error ya que actualmente devuelve un 500 Internal Server Error")
+    override suspend fun getAllSources(): List<Source> = dbQuery {
+        Sources.selectAll().map { resultRowToSource(it) }
     }
 
     override suspend fun deleteSource(id: String): Boolean = dbQuery{
