@@ -2,9 +2,9 @@
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
+!**/src/main/**/resources/
 !**/src/test/**/build/
 !**/src/main/resources/application.conf
-src/main/resources/application.conf
 **/application.conf
 
 ### STS ###
