@@ -6,9 +6,8 @@ import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-
-fun Routing.parserTypeRoute(parserTypeService: ParserTypeService){
-    route("/parsertype"){
+fun Routing.parserTypeRoute(parserTypeService: ParserTypeService) {
+    route("/parsertype") {
         get {
             val verticals = parserTypeService.getAllParserTypes()
             call.respond(HttpStatusCode.OK, verticals)

@@ -3,7 +3,11 @@ package com.example.db
 import com.example.models.SourceContent
 import com.example.models.SourcesContent
 import com.example.plugins.dbQuery
-import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.ResultRow
+import org.jetbrains.exposed.sql.and
+import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.update
 
 class SourceContentServiceImpl : SourceContentService {
     private fun resultRowToSourceContent(row: ResultRow): SourceContent {

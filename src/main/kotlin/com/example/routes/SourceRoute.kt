@@ -6,12 +6,11 @@ import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-
-fun Routing.sourceRoute(sourceService: SourceService){
-    route("/source"){
+fun Routing.sourceRoute(sourceService: SourceService) {
+    route("/source") {
         get {
             val sources = sourceService.getAllSources()
-            if (sources.isEmpty()){
+            if (sources.isEmpty()) {
                 call.respond(HttpStatusCode.NotFound, "No sources found")
             } else {
                 call.respond(HttpStatusCode.OK, sources)

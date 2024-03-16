@@ -4,7 +4,13 @@ import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.Table
 
 @Serializable
-data class SourceContent(val country: String, val source: Int, val vertical: Int, val crawlingType: String?, val writesHDFS: Boolean)
+data class SourceContent(
+    val country: String,
+    val source: Int,
+    val vertical: Int,
+    val crawlingType: String?,
+    val writesHDFS: Boolean,
+)
 
 object SourcesContent : Table("tbl_sources_content") {
     val fkCountry = varchar("fk_c_id_tbl_countries", 255).references(Countries.id)
