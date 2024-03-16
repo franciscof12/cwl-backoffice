@@ -23,6 +23,7 @@ class SourceServiceImpl : SourceService {
 
     override suspend fun getAllSources(): List<Source> = dbQuery{
         Sources.selectAll().map { resultRowToVertical(it) }
+        TODO("Reparar el error ya que actualmente devuelve un 500 Internal Server Error")
     }
 
     override suspend fun deleteSource(id: String): Boolean = dbQuery{
