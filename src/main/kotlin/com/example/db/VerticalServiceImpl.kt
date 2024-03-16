@@ -1,7 +1,5 @@
 package com.example.db
 
-import com.example.models.Countries
-import com.example.models.Country
 import org.jetbrains.exposed.sql.*
 import com.example.plugins.dbQuery
 import com.example.models.Vertical

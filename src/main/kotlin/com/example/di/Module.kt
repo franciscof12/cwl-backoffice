@@ -7,4 +7,5 @@ val appModule = module {
     single<CountryService> { CountryServiceImpl() }
     single<VerticalService> { VerticalServiceImpl() }
     single<SourceService> { SourceServiceImpl() }
+    single<ParserTypeService> { ParserTypeServiceImpl() }
 }
