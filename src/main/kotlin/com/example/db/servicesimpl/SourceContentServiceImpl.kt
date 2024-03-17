@@ -1,5 +1,6 @@
-package com.example.db
+package com.example.db.servicesimpl
 
+import com.example.db.services.SourceContentService
 import com.example.models.SourceContent
 import com.example.models.SourcesContent
 import com.example.plugins.dbQuery

@@ -1,4 +1,4 @@
-package com.example.db
+package com.example.db.services
 
 import com.example.models.Country
 

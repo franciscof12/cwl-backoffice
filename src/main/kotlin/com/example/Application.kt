@@ -1,10 +1,14 @@
 package com.example
 
-import com.example.plugins.*
 import com.example.plugins.configureCORS
-import io.ktor.server.application.*
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
+import com.example.plugins.configureDI
+import com.example.plugins.configureDatabases
+import com.example.plugins.configureMonitoring
+import com.example.plugins.configureRouting
+import com.example.plugins.configureSerialization
+import io.ktor.server.application.Application
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.netty.Netty
 
 fun main() {
     embeddedServer(Netty, port = 8080, host = "127.0.0.1", module = Application::module)

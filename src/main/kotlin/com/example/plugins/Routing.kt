@@ -1,6 +1,10 @@
 package com.example.plugins
 
-import com.example.db.*
+import com.example.db.services.CountryService
+import com.example.db.services.ParserTypeService
+import com.example.db.services.SourceContentService
+import com.example.db.services.SourceService
+import com.example.db.services.VerticalService
 import com.example.routes.*
 import io.ktor.http.*
 import io.ktor.server.application.*

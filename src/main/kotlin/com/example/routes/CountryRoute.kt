@@ -1,6 +1,6 @@
 package com.example.routes
 
-import com.example.db.CountryService
+import com.example.db.services.CountryService
 import com.example.models.Country
 import io.ktor.http.*
 import io.ktor.server.application.*

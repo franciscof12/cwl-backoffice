@@ -1,5 +1,6 @@
-package com.example.db
+package com.example.db.servicesimpl
 
+import com.example.db.services.ParserTypeService
 import com.example.models.ParserType
 import com.example.models.ParserTypes
 import com.example.plugins.dbQuery

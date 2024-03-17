@@ -1,5 +1,6 @@
-package com.example.db
+package com.example.db.servicesimpl
 
+import com.example.db.services.VerticalService
 import com.example.models.Vertical
 import com.example.models.Verticals
 import com.example.plugins.dbQuery
