@@ -6,6 +6,7 @@ import com.example.models.SourcesContent
 import com.example.plugins.dbQuery
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.and
+import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.update
@@ -49,5 +50,18 @@ class SourceContentServiceImpl : SourceContentService {
                 it[crawlingType] = sourceContent.crawlingType
                 it[writesHDFS] = sourceContent.writesHDFS
             }
+        }
+
+    override suspend fun addSourceContent(sourceContent: SourceContent): SourceContent? =
+        dbQuery {
+            val insertSourceContent =
+                SourcesContent.insert {
+                    it[fkCountry] = sourceContent.country
+                    it[fkSource] = sourceContent.source
+                    it[fkVertical] = sourceContent.vertical
+                    it[crawlingType] = sourceContent.crawlingType
+                    it[writesHDFS] = sourceContent.writesHDFS
+                }
+            insertSourceContent.resultedValues?.singleOrNull()?.let { resultRowToSourceContent(it) }
         }
 }

@@ -8,6 +8,7 @@ import io.ktor.server.request.receive
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Routing
 import io.ktor.server.routing.get
+import io.ktor.server.routing.post
 import io.ktor.server.routing.put
 import io.ktor.server.routing.route
 
@@ -19,6 +20,15 @@ fun Routing.sourceContentRoute(sourceContentService: SourceContentService) {
                 call.respond(HttpStatusCode.NotFound, "No sources found")
             } else {
                 call.respond(HttpStatusCode.OK, sourcescontent)
+            }
+        }
+        post {
+            val sourceContent = call.receive<SourceContent>()
+            val added = sourceContentService.addSourceContent(sourceContent)
+            if (added != null) {
+                call.respond(HttpStatusCode.Created, added)
+            } else {
+                call.respond(HttpStatusCode.NotImplemented, "Source content not added")
             }
         }
 

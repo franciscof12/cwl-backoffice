@@ -12,4 +12,6 @@ interface SourceContentService {
     ): List<SourceContent>
 
     suspend fun updateSourceContent(sourceContent: SourceContent): Int
+
+    suspend fun addSourceContent(sourceContent: SourceContent): SourceContent?
 }
