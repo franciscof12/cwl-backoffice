@@ -9,6 +9,10 @@ FROM openjdk:11-jre-slim
 
 COPY --from=builder /home/gradle/src/build/libs/*.jar /app/app.jar
 
+COPY wait-for-it.sh /app/wait-for-it.sh
+
 WORKDIR /app
 
-CMD ["java", "-jar", "app.jar"]
+RUN chmod +x /app/wait-for-it.sh
+
+CMD ["/app/wait-for-it.sh", "db:3306", "--", "java", "-jar", "app.jar"]
