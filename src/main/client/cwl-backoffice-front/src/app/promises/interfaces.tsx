@@ -5,6 +5,12 @@ interface SourcesContent {
     crawlingType: string;
     writesHDFS: boolean;
 }
+interface BlockedSources {
+    country: string;
+    vertical: number;
+    sources: number;
+
+}
 
 interface Sources {
     id: number;
@@ -35,3 +41,5 @@ interface ParserType {
     id: number;
     name: string;
 }
+
+export type { SourcesContent, Sources, Countries, Verticals, ParserType, BlockedSources };

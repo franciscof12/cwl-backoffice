@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
+import {SourcesContent} from "@/app/promises/interfaces";
 
-const useFetchData = (url: any) => {
-    const [data, setData] = useState([]);
+const useFetchData = (url: string): SourcesContent[] => {
+    const [data, setData] = useState<SourcesContent[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await fetch(url);
-                const jsonData = await response.json();
+                const jsonData: SourcesContent[] = await response.json();
                 setData(jsonData);
             } catch (error) {
                 console.error('Error fetching data:', error);

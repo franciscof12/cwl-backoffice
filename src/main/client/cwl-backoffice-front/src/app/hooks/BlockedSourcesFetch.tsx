@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
-import {SourcesContent} from "@/app/promises/interfaces";
+import {BlockedSources} from "@/app/promises/interfaces";
 
-const useFetchData = (url: string): SourcesContent[] => {
-    const [data, setData] = useState<SourcesContent[]>([]);
+const useBlockedSources = (url: string): BlockedSources[] => {
+    const [data, setData] = useState<BlockedSources[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await fetch(url);
-                const jsonData: SourcesContent[] = await response.json();
+                const jsonData: BlockedSources[] = await response.json();
                 setData(jsonData);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -22,4 +22,4 @@ const useFetchData = (url: string): SourcesContent[] => {
     return data;
 };
 
-export default useFetchData;
+export default useBlockedSources;

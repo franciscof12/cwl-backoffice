@@ -4,7 +4,7 @@ import ProfilePicture from "@/app/components/icons/ProfilePicture";
 
 export default function Header() {
     return (
-        <div className="p-4 h-full w-full items-center flex justify-between">
+        <div className="p-10 h-full w-full items-center flex justify-between">
             <Trovitblue/>
             <div className='flex-row flex gap-2 items-center justify-end'>
                 <ProfilePicture/>
