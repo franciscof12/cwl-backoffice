@@ -12,14 +12,11 @@ import org.jetbrains.exposed.sql.selectAll
 class CountryServiceImpl : CountryService {
     private fun resultRowToCountry(row: ResultRow): Country {
         return Country(
-            cId = row[Countries.id],
-            fkCIdTblLanguages = row[Countries.fkCIdTblLanguages],
-            fkSCurrencyTblCurrencies = row[Countries.fkSCurrencyTblCurrencies],
-            sBillingCurrency = row[Countries.sBillingCurrency],
+            id = row[Countries.id],
             sName = row[Countries.sName],
-            bIsActive = row[Countries.bIsActive],
-            bIsSandboxActive = row[Countries.bIsSandboxActive],
-            sSimilarNames = row[Countries.sSimilarNames],
+            active = row[Countries.bIsActive],
+            sbxactive = row[Countries.bIsSandboxActive],
+            similarNames = row[Countries.sSimilarNames],
         )
     }
 
@@ -27,14 +24,11 @@ class CountryServiceImpl : CountryService {
         dbQuery {
             val insertStmt =
                 Countries.insert {
-                    it[id] = country.cId
-                    it[fkCIdTblLanguages] = country.fkCIdTblLanguages
-                    it[fkSCurrencyTblCurrencies] = country.fkSCurrencyTblCurrencies
-                    it[sBillingCurrency] = country.sBillingCurrency
+                    it[id] = country.id
                     it[sName] = country.sName
-                    it[bIsActive] = country.bIsActive
-                    it[bIsSandboxActive] = country.bIsSandboxActive
-                    it[sSimilarNames] = country.sSimilarNames
+                    it[bIsActive] = country.active
+                    it[bIsSandboxActive] = country.sbxactive
+                    it[sSimilarNames] = country.similarNames
                 }
             insertStmt.resultedValues?.singleOrNull()?.let { resultRowToCountry(it) }
         }

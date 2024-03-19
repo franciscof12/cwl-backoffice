@@ -6,11 +6,11 @@ import org.jetbrains.exposed.sql.Table
 
 @Serializable
 data class Source(
-    val iIdL: Int,
-    val fkCIdTblCountries: String,
-    val fkIIdTblVertical: Int,
-    val fkIidTblParserTypes: Int,
-    val bActive: Boolean,
+    val id: Int,
+    val country: String,
+    val vertical: Int,
+    val parserType: Int,
+    val active: Boolean,
 )
 
 object Sources : Table("tbl_sources") {

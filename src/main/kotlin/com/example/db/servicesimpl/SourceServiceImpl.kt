@@ -10,11 +10,11 @@ import org.jetbrains.exposed.sql.selectAll
 class SourceServiceImpl : SourceService {
     private fun resultRowToSource(row: ResultRow): Source {
         return Source(
-            iIdL = row[Sources.id],
-            fkCIdTblCountries = row[Sources.country],
-            fkIIdTblVertical = row[Sources.vertical],
-            fkIidTblParserTypes = row[Sources.parsertype],
-            bActive = row[Sources.active],
+            id = row[Sources.id],
+            country = row[Sources.country],
+            vertical = row[Sources.vertical],
+            parserType = row[Sources.parsertype],
+            active = row[Sources.active],
         )
     }
 
