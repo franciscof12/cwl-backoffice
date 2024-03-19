@@ -1,6 +1,11 @@
-import SideNav from "@/app/dashboard/components/sideNav";
-import Header from "@/app/dashboard/components/header";
- 
+import SideNav from "@/app/components/sideNav";
+import Header from "@/app/components/header";
+
+import {Inter} from "next/font/google";
+import {Onest} from "next/font/google";
+
+const interStyle = Inter({subsets: ["latin"]});
+const onestFont = Onest({subsets: ["latin"], weight: '400'});
 
 export default function RootLayout({
                                        children,
@@ -8,14 +13,16 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     return (
-            <div className="grid grid-cols-8 grid-rows-12 h-screen w-screen bg-color-ui-crema_white">
-            <div className="row-span-12 p-2 h-full w-full bg-color-ui-crema_black">
-                <SideNav/>
+        <>
+            <div className={`grid grid-cols-6 grid-rows-10 h-screen w-screen bg-color-ui-crema_white`} style={{...interStyle.style, ...onestFont.style}}>
+                <div className="row-span-10 h-full w-full bg-color-ui-crema_black">
+                    <SideNav/>
+                </div>
+                <div className="col-span-5 col-start-2 row-start-1 w-full items-center justify-center p-4 gap-4">
+                    <Header/>
+                </div>
+                <div className="col-span-5 row-span-9 col-start-2 row-start-2  h-full w-full p-4 gap-4">{children}</div>
             </div>
-            <div className="col-span-9 bg-transparent p-2 w-full items-center justify-center">
-                <Header />
-            </div>
-            <div className="col-span-9 row-span-11 col-start-2 row-start-2 bg-transparent w-full h-full p-2">{children}</div>
-        </div> 
+        </>
     )
 }
