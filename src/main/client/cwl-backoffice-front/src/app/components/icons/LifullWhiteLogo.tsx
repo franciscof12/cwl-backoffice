@@ -4,8 +4,8 @@ function WhiteLifullLogo() {
     return (
         <Image
             src="/whitelifull.png"
-            width={34}
-            height={34}
+            width={28}
+            height={28}
             alt="Picture of the trovit logo"
         />
     );

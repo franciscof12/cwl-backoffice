@@ -1,10 +1,9 @@
 'use client'
 import BlockedSourcesFetch from "@/app/hooks/BlockedSourcesFetch";
-import {BlockedSources} from "@/app/promises/interfaces";
 
 export default function Page() {
-    const data: BlockedSources[] = BlockedSourcesFetch('http://localhost:8080/blockedsources');
-    return (
+    const [data, refreshData] = BlockedSourcesFetch('http://localhost:8080/blockedsources');
+        return (
         <div className="p-4 h-full w-full rounded-md">
             <div className="grid grid-cols-8 grid-rows-10 gap-4 h-full w-full">
                 <div className="col-span-2 row-span-2 rounded-xl isolate backdrop-blur-sm bg-neutral-100/50">
@@ -83,18 +82,16 @@ export default function Page() {
                                                 <td className="whitespace-nowrap px-6 py-4" style={{ minWidth: '200px' }}>{item.country}</td>
                                                 <td className="whitespace-nowrap px-6 py-4" style={{ minWidth: '200px' }}>{item.vertical}</td>
                                                 <td className="whitespace-nowrap px-6 py-4" style={{ minWidth: '200px' }}>{item.sources}</td>
-                                                <td className="whitespace-nowrap px-6 py-4" style={{ minWidth: '200px' }}>
+                                                <td className="whitespace-nowrap px-6 py-4" style={{minWidth: '200px'}}>
                                                     <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-                                                            onClick={() => {
-                                                                fetch('http://localhost:8080/blockedsources/' + item.country + '/' + item.vertical + '/' + item.sources, {
-                                                                    method: 'DELETE',
-                                                                    headers: {
-                                                                        'Content-Type': 'application/json',
-                                                                    },
-                                                                }).then(() => {
-                                                                    console.log('unblocked source');
-                                                                });
-                                                            }}>Unblock
+                                                        onClick={async () => {
+                                                            await fetch(`http://localhost:8080/blockedsources/${item.country}/${item.vertical}/${item.sources}`, {
+                                                                method: 'DELETE',
+                                                            });
+                                                            refreshData()
+                                                        }}
+                                                    >
+                                                        Unblock
                                                     </button>
                                                 </td>
                                             </tr>

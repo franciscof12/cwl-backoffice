@@ -2,8 +2,41 @@
 import SourcesContentFetch from "@/app/hooks/SourcesContentFetch";
 import {SourcesContent} from "@/app/promises/interfaces";
 
+
 export default function Page() {
-    const data: SourcesContent[] = SourcesContentFetch('http://localhost:8080/sourcecontent');
+    const [data, refreshData] = SourcesContentFetch('http://localhost:8080/sourcecontent');
+    const handleHDFSClick = async (item: SourcesContent, writesHDFS?: boolean) => {
+        await fetch(`http://localhost:8080/sourcecontent`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                country: item.country,
+                source: item.source,
+                vertical: item.vertical,
+                crawlingType: item.crawlingType,
+                writesHDFS: writesHDFS
+            })
+        });
+        refreshData();
+    }
+    const handleTypeClick = async (item: SourcesContent, crawlingType?: string) => {
+        await fetch(`http://localhost:8080/sourcecontent`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                country: item.country,
+                source: item.source,
+                vertical: item.vertical,
+                crawlingType: crawlingType,
+                writesHDFS: item.writesHDFS
+            })
+        });
+        refreshData();
+    }
     return (
         <div className="p-4 h-full w-full rounded-md">
             <div className="grid grid-cols-8 grid-rows-10 gap-4 h-full w-full">
@@ -63,11 +96,19 @@ export default function Page() {
                                     <table className="min-w-full text-left text-sm font-light text-surface">
                                         <thead className="border-b border-neutral-200 font-medium">
                                         <tr>
-                                            <th className="px-6 py-4 font-semibold" style={{ minWidth: '120px' }}>Country</th>
-                                            <th className="px-6 py-4 font-semibold" style={{ minWidth: '120px' }}>Source</th>
-                                            <th className="px-6 py-4 font-semibold" style={{ minWidth: '120px' }}>Vertical</th>
-                                            <th className="px-6 py-4 font-semibold" style={{ minWidth: '120px' }}>Type</th>
-                                            <th className="px-6 py-4 font-semibold" style={{ minWidth: '120px' }}>WritesHDFS</th>
+                                            <th className="px-6 py-4 font-semibold"
+                                                style={{minWidth: '120px'}}>Country
+                                            </th>
+                                            <th className="px-6 py-4 font-semibold"
+                                                style={{minWidth: '120px'}}>Vertical
+                                            </th>
+                                            <th className="px-6 py-4 font-semibold" style={{minWidth: '120px'}}>Source
+                                            </th>
+                                            <th className="px-6 py-4 font-semibold" style={{minWidth: '120px'}}>Type
+                                            </th>
+                                            <th className="px-6 py-4 font-semibold"
+                                                style={{minWidth: '120px'}}>WritesHDFS
+                                            </th>
                                         </tr>
                                         </thead>
                                     </table>
@@ -79,13 +120,24 @@ export default function Page() {
                                             <tr key={index}
                                                 className="border-b border-neutral-200 transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-white/10 dark:hover:bg-neutral-300/80 dark:hover:text-color-ui-crema_black dark:hover:cursor-pointer">
                                                 <td className="whitespace-nowrap px-6 py-4" style={{ minWidth: '120px' }}>{item.country}</td>
-                                                <td className="whitespace-nowrap px-6 py-4" style={{ minWidth: '120px' }}>{item.source}</td>
                                                 <td className="whitespace-nowrap px-6 py-4" style={{ minWidth: '120px' }}>{item.vertical}</td>
+                                                <td className="whitespace-nowrap px-6 py-4" style={{ minWidth: '120px' }}>{item.source}</td>
                                                 <td className="whitespace-nowrap px-6 py-4" style={{ minWidth: '120px' }}>
-                                                    {item.crawlingType == 'gocustom' ? <p className='text-blue-600/90 font-semibold'>Gocustom</p> : 'Not Specified'}
+                                                    {item.crawlingType == 'gocustom' ? <button className={'text-blue-950/90'} onClick={() => handleTypeClick(item,"parser")}>gocustom</button> : <button className={'text-red-300'} onClick={() => handleTypeClick(item,"gocustom")}>Parser</button>}
                                                 </td>
                                                 <td className="whitespace-nowrap px-6 py-4" style={{ minWidth: '120px' }}>
-                                                    {item.writesHDFS ? <p className='text-green-600/90 font-semibold'>Yes</p> : <p className='text-red-600/90 font-semibold'>No</p>}
+                                                    {item.writesHDFS ? <button
+                                                            className={'text-green-600/90 font-semibold cursor-pointer'}
+                                                            onClick={() => handleHDFSClick(item, false)}
+                                                        >
+                                                            Yes
+                                                        </button> :
+                                                        <button
+                                                            className={'text-red-600/90 font-semibold cursor-pointer'}
+                                                            onClick={() => handleHDFSClick(item, true)}
+                                                        >
+                                                            No
+                                                        </button>}
                                                 </td>
                                             </tr>
                                         ))}

@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
-import {SourcesContent} from "@/app/promises/interfaces";
+// useBlockedSources.tsx
+import { useState, useEffect, useCallback } from 'react';
+import { SourcesContent } from "@/app/promises/interfaces";
 
-const useFetchData = (url: string): SourcesContent[] => {
+const useBlockedSources = (url: string): [SourcesContent[], () => void] => {
     const [data, setData] = useState<SourcesContent[]>([]);
 
     useEffect(() => {
@@ -19,7 +20,18 @@ const useFetchData = (url: string): SourcesContent[] => {
         fetchData();
     }, [url]);
 
-    return data;
+    const refreshData = useCallback(async () => {
+        try {
+            const response = await fetch(url);
+            const jsonData: SourcesContent[] = await response.json();
+            setData(jsonData);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            setData([]);
+        }
+    }, [url]);
+
+    return [data, refreshData];
 };
 
-export default useFetchData;
+export default useBlockedSources;
